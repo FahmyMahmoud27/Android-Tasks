@@ -6,9 +6,7 @@ plugins {
 
 android {
     namespace = "com.linkdevelopment.android_tasks"
-    compileSdk {
-        version = release(36)
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.linkdevelopment.android_tasks"
