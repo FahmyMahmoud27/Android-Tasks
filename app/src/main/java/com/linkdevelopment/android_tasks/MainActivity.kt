@@ -11,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.linkdevelopment.android_tasks.ui.AppNavigation
 import com.linkdevelopment.android_tasks.ui.screens.TaskScreen
 import com.linkdevelopment.android_tasks.ui.theme.AndroidTasksTheme
 
@@ -21,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             AndroidTasksTheme {
                 Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    TaskScreen()
+                    AppNavigation()
                 }
             }
         }

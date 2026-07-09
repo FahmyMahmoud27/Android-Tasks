@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Android-Tasks</string>
+    <string name="notes">Notes</string>
+    <string name="add_note">Add Note</string>
+    <string name="title">Title</string>
+    <string name="enter_title">Enter title</string>
+    <string name="title_is_required">Title is required</string>
+    <string name="description">Description</string>
+    <string name="enter_description">Enter description</string>
+    <string name="save">Save</string>
+    <string name="note_details">Note Details</string>
+    <string name="description_details">Description</string>
+    <string name="created">Created</string>
+    <string name="delete_note">Delete Note</string>
 </resources>
