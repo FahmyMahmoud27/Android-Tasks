@@ -33,6 +33,7 @@ fun NoteDetailsScreen(
                     Text(
                         text = stringResource(R.string.note_details),
                         style = MaterialTheme.typography.titleLarge
+                        , color = MaterialTheme.colorScheme.secondary
                     )
                 },
                 navigationIcon = {
@@ -61,6 +62,7 @@ fun NoteDetailsScreen(
                 Text(
                     text = note.title,
                     style = MaterialTheme.typography.titleLarge
+                    , color = MaterialTheme.colorScheme.secondary
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -68,6 +70,7 @@ fun NoteDetailsScreen(
                 Text(
                     text = stringResource(R.string.description_details),
                     style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.secondary
 
                     )
                 Spacer(modifier = Modifier.height(8.dp))

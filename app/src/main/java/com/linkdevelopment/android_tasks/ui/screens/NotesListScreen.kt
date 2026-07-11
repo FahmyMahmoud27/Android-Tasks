@@ -30,6 +30,7 @@ fun NotesListScreen(
                     Text(
                         text = stringResource(com.linkdevelopment.android_tasks.R.string.notes),
                         style = MaterialTheme.typography.titleLarge
+                        , color = MaterialTheme.colorScheme.secondary
                     )
                 },
             )
@@ -59,6 +60,7 @@ fun NotesListScreen(
                 Text(
                     text = stringResource(R.string.no_notes_found),
                     style = MaterialTheme.typography.bodyLarge
+                    , color = MaterialTheme.colorScheme.secondary
                 )
             }
         }else{

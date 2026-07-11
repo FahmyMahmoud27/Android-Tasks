@@ -41,6 +41,7 @@ fun NoteItem(
             Text(
                 text = note.title,
                 style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.secondary
             )
 
             Spacer(modifier = Modifier.height(8.dp))

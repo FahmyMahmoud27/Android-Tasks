@@ -31,6 +31,8 @@ fun AddNoteScreen(
                     Text(
                         text = stringResource(R.string.add_note),
                         style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.secondary
+
                     )
                 },
                 navigationIcon = {
@@ -54,6 +56,7 @@ fun AddNoteScreen(
             Text(
                 text = stringResource(R.string.title),
                 style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.padding(bottom = 10.dp)
             )
 
