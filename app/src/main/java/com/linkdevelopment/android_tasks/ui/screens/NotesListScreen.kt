@@ -1,21 +1,29 @@
 package com.linkdevelopment.android_tasks.ui.screens
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.linkdevelopment.android_tasks.R
 import com.linkdevelopment.android_tasks.data.Note
-import com.linkdevelopment.android_tasks.ui.theme.Purple40
+import com.linkdevelopment.android_tasks.ui.theme.AddNoteButtonShape
 import com.linkdevelopment.android_tasks.ui.utils.NoteItem
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -31,8 +39,8 @@ fun NotesListScreen(
                 title = {
                     Text(
                         text = stringResource(com.linkdevelopment.android_tasks.R.string.notes),
-                        fontSize = 35.sp,
-                        fontWeight = FontWeight.Bold
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.secondary
                     )
                 },
             )
@@ -40,9 +48,9 @@ fun NotesListScreen(
         floatingActionButton = {
             FloatingActionButton(
                 onClick = onFABClick,
-                containerColor = Purple40,
-                contentColor = Color.White,
-                shape = RoundedCornerShape(100.dp)
+                containerColor = MaterialTheme.colorScheme.primary,
+                contentColor = MaterialTheme.colorScheme.onBackground,
+                shape = AddNoteButtonShape
             ) {
                 Icon(
                     imageVector = Icons.Default.Add,
@@ -52,20 +60,35 @@ fun NotesListScreen(
             }
         }
     ) { paddingValues ->
-
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            items(notes) { singleNote ->
-                NoteItem(
-                    note = singleNote,
-                    onNoteClick = onNoteClick
+        if (notes.isEmpty()) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = stringResource(R.string.no_notes_found),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.secondary
                 )
             }
+        } else {
+            LazyColumn(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(12.dp)
+            ) {
+                items(notes) { singleNote ->
+                    NoteItem(
+                        note = singleNote,
+                        onNoteClick = onNoteClick
+                    )
+                }
+            }
         }
+
     }
 }

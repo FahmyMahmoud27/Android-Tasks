@@ -12,8 +12,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.linkdevelopment.android_tasks.ui.AppNavigation
-import com.linkdevelopment.android_tasks.ui.screens.TaskScreen
 import com.linkdevelopment.android_tasks.ui.theme.AndroidTasksTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,8 +23,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AndroidTasksTheme {
-                Scaffold( modifier = Modifier.fillMaxSize() ) { innerPadding ->
-                    AppNavigation()
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                AppNavigation()
                 }
             }
         }
