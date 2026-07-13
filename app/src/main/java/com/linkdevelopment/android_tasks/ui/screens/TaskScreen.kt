@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -36,7 +37,6 @@ import com.linkdevelopment.android_tasks.ui.theme.Black
 import com.linkdevelopment.android_tasks.ui.theme.LightGreenBg
 import com.linkdevelopment.android_tasks.ui.theme.PrimaryGreen
 import com.linkdevelopment.android_tasks.ui.utils.TaskItem
-import androidx.compose.material.icons.filled.Home
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -61,7 +61,7 @@ fun TaskScreen() {
                     }
                 },
 
-            )
+                )
         }
 
     ) {
@@ -93,7 +93,11 @@ fun TaskScreen() {
                             tasks.add(taskText)
                             taskText = ""
                         }) {
-                            Icon(Icons.Default.Add, contentDescription = "Add Task", tint = PrimaryGreen)
+                            Icon(
+                                Icons.Default.Add,
+                                contentDescription = "Add Task",
+                                tint = PrimaryGreen
+                            )
                         }
                     }
                 },

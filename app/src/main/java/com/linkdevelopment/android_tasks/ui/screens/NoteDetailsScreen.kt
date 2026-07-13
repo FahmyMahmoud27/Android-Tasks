@@ -1,21 +1,34 @@
 package com.linkdevelopment.android_tasks.ui.screens
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material3.*
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.linkdevelopment.android_tasks.R
 import com.linkdevelopment.android_tasks.data.Note
 
@@ -32,8 +45,8 @@ fun NoteDetailsScreen(
                 title = {
                     Text(
                         text = stringResource(R.string.note_details),
-                        style = MaterialTheme.typography.titleLarge
-                        , color = MaterialTheme.colorScheme.secondary
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.secondary
                     )
                 },
                 navigationIcon = {
@@ -61,8 +74,8 @@ fun NoteDetailsScreen(
             ) {
                 Text(
                     text = note.title,
-                    style = MaterialTheme.typography.titleLarge
-                    , color = MaterialTheme.colorScheme.secondary
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.secondary
                 )
 
                 Spacer(modifier = Modifier.height(24.dp))
@@ -72,7 +85,7 @@ fun NoteDetailsScreen(
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.secondary
 
-                    )
+                )
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = note.description,
