@@ -1,4 +1,4 @@
-package com.linkdevelopment.android_tasks.ui.theme
+package com.linkdevelopment.android_tasks.presentation.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes
