@@ -1,19 +1,14 @@
 package com.linkdevelopment.android_tasks.ui.screens
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.linkdevelopment.android_tasks.R
-import com.linkdevelopment.android_tasks.ui.theme.Purple40
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -35,13 +30,16 @@ fun AddNoteScreen(
                 title = {
                     Text(
                         text = stringResource(R.string.add_note),
-                        fontWeight = FontWeight.Bold
+                        style = MaterialTheme.typography.titleLarge,
+                        color = MaterialTheme.colorScheme.secondary
+
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = onBackClick) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                            tint = MaterialTheme.colorScheme.secondary,
                             contentDescription = ""
                         )
                     }
@@ -57,7 +55,8 @@ fun AddNoteScreen(
         ) {
             Text(
                 text = stringResource(R.string.title),
-                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.secondary,
                 modifier = Modifier.padding(bottom = 10.dp)
             )
 
@@ -71,9 +70,11 @@ fun AddNoteScreen(
                 modifier = Modifier.fillMaxWidth(),
                 isError = isTitleError,
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Purple40,
-                    unfocusedBorderColor = Color.LightGray,
-                    errorBorderColor = Color.Red
+                    focusedTextColor = MaterialTheme.colorScheme.secondary,
+                    unfocusedTextColor = MaterialTheme.colorScheme.secondary,
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.secondary,
+                    errorBorderColor = MaterialTheme.colorScheme.tertiary
                 )
             )
 
@@ -81,8 +82,8 @@ fun AddNoteScreen(
             if (isTitleError) {
                 Text(
                     text = stringResource(R.string.title_is_required),
-                    color = Color.Red,
-                    fontSize = 12.sp,
+                    color = MaterialTheme.colorScheme.error,
+                    style = MaterialTheme.typography.labelSmall,
                     modifier = Modifier.padding(top = 4.dp, start = 4.dp)
                 )
             }
@@ -91,7 +92,7 @@ fun AddNoteScreen(
 
             Text(
                 text = stringResource(R.string.description),
-                fontWeight = FontWeight.Medium,
+                style = MaterialTheme.typography.bodyLarge,
                 modifier = Modifier.padding(bottom = 8.dp)
             )
             OutlinedTextField(
@@ -102,8 +103,10 @@ fun AddNoteScreen(
                     .fillMaxWidth()
                     .weight(1f),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Purple40,
-                    unfocusedBorderColor = Color.LightGray
+                    focusedTextColor = MaterialTheme.colorScheme.secondary,
+                    unfocusedTextColor = MaterialTheme.colorScheme.secondary,
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.secondary
                 )
             )
 
@@ -124,10 +127,16 @@ fun AddNoteScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Purple40)
+                shape = MaterialTheme.shapes.small,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                )
             ) {
-                Text(text = stringResource(R.string.save), color = Color.White, fontSize = 20.sp)
+                Text(
+                    text = stringResource(R.string.save),
+                    color = MaterialTheme.colorScheme.onBackground,
+                    style = MaterialTheme.typography.titleLarge
+                )
             }
         }
     }
