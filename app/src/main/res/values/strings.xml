@@ -12,4 +12,10 @@
     <string name="description_details">Description</string>
     <string name="created">Created</string>
     <string name="delete_note">Delete Note</string>
+    <string name="no_notes_found">No notes found</string>
+    <string name="no_favorite_posts">No Favorite Posts:</string>
+    <string name="favorite_posts">Favorite Posts</string>
+    <string name="posts">Posts</string>
+    <string name="search_by_id">Search by id</string>
+    <string name="search">Search</string>
 </resources>
