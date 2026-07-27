@@ -53,4 +53,10 @@ class LocalDataSource @Inject constructor(
         return moviesDao.getMovies()
     }
 
+    suspend fun insertMovies(
+        movies: List<MovieLocalEntity>
+    ) {
+        moviesDao.insertMovies(movies)
+    }
+
 }

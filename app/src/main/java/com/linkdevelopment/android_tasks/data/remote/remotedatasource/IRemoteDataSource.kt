@@ -5,6 +5,6 @@ import com.linkdevelopment.android_tasks.domain.model.DataState
 
 interface IRemoteDataSource {
 
-    suspend fun getNowPlayingMovies(): DataState<MoviesResponse>
+    suspend fun getNowPlayingMovies(page: Int): DataState<MoviesResponse>
 
 }

@@ -26,37 +26,59 @@ class MoviesViewModel @Inject constructor(
 
     private fun getGridSelected() {
         viewModelScope.launch {
-            repository.getGridSelected()
-                .collect {
-                    _state.value = _state.value.copy(
-                        isGrid = it
-                    )
-                }
+            repository.getGridSelected().collect {
+                _state.value = _state.value.copy(
+                    isGrid = it
+                )
+            }
         }
     }
 
-    fun getMovies() {
+    fun getMovies(loadingType: LoadingType = LoadingType.NORMAL) {
         viewModelScope.launch {
+            val page = _state.value.page
             _state.value = _state.value.copy(
-                isLoading = true,
+                isLoading = loadingType == LoadingType.NORMAL,
+                loadingType = loadingType,
                 errorMessage = null
             )
-            val result = repository.getMovies()
+            val result = repository.getMovies(page)
             when (result) {
                 is DataState.StateSuccess -> {
                     _state.value = _state.value.copy(
-                        movies = result.data,
-                        isLoading = false
+                        movies = if (loadingType == LoadingType.PAGINATION) {
+                            _state.value.movies + result.data.movies
+                        } else {
+                            result.data.movies
+                        },
+                        totalPages = result.data.totalPages,
+                        isLoading = false,
+                        loadingType = LoadingType.NONE
                     )
                 }
-
                 is DataState.StateError -> {
                     _state.value = _state.value.copy(
                         errorMessage = result.errorMessages,
-                        isLoading = false
+                        isLoading = false,
+                        loadingType = LoadingType.NONE
                     )
                 }
             }
+        }
+    }
+
+    private fun requestNextPage() {
+        val currentState = _state.value
+        if (
+            currentState.page < currentState.totalPages &&
+            currentState.loadingType == LoadingType.NONE
+        ) {
+            _state.value = currentState.copy(
+                page = currentState.page + 1
+            )
+            getMovies(
+                LoadingType.PAGINATION
+            )
         }
     }
 
@@ -70,7 +92,6 @@ class MoviesViewModel @Inject constructor(
                     isGrid = true
                 )
             }
-
             MoviesContract.UiAction.ChangeToList -> {
                 viewModelScope.launch {
                     repository.saveGridSelected(false)
@@ -79,10 +100,9 @@ class MoviesViewModel @Inject constructor(
                     isGrid = false
                 )
             }
+            MoviesContract.UiAction.LoadNextPage -> {
+                requestNextPage()
+            }
         }
     }
-
-
 }
-
-

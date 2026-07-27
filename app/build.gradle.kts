@@ -78,6 +78,8 @@ dependencies {
     implementation("androidx.room:room-ktx:${room_version}")
     ksp("androidx.room:room-compiler:${room_version}")
 
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

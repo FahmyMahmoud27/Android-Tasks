@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -20,12 +21,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.room.util.TableInfo
+import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
 fun MoviesScreen(
@@ -33,9 +36,28 @@ fun MoviesScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    LaunchedEffect(Unit) {
-        viewModel.getMovies()
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(listState, state.movies.size) {
+
+        snapshotFlow {
+            listState.layoutInfo.visibleItemsInfo.lastOrNull()?.index
+        }
+            .distinctUntilChanged()
+            .collect { lastVisibleItem ->
+
+                if (lastVisibleItem != null &&
+                    lastVisibleItem >= state.movies.size - 2
+                ) {
+
+                    viewModel.onAction(
+                        MoviesContract.UiAction.LoadNextPage
+                    )
+
+                }
+            }
     }
+
 
     Column(
         modifier = Modifier
@@ -114,12 +136,24 @@ fun MoviesScreen(
                     }
                 } else {
                     LazyColumn(
-                        modifier = Modifier.fillMaxSize()
+                        state = listState
                     ) {
                         items(state.movies) { movie ->
                             MovieCard(
                                 movie = movie
                             )
+                        }
+                        if (state.loadingType == LoadingType.PAGINATION) {
+                            item {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(16.dp),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    CircularProgressIndicator()
+                                }
+                            }
                         }
                     }
                 }
